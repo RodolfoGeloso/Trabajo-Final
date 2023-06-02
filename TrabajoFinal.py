@@ -18,7 +18,9 @@ while True:
           2 - Buscar producto.
           3 - Modificar datos del producto.
           4 - Ver listado de stock.
-          5 - Salir.
+          5 - Exportar a un Archivo.
+          6 - Importar a un Archivo
+          7 - Salir.
            """)
     opcion=int(input("Ingrese su opción: "))
     
@@ -71,7 +73,17 @@ Listado de los productos en el inventario.""")
         for nombre,item in stock.items():
             print(nombre, item)
     elif opcion==5:
-        print(""""\nOpcion 5
+        print("""\nOpcion 5.
+Importar desde un archivo!!!!!!!!!!!""")
+        pass
+    
+    elif opcion==6:
+        print("""\nOpcion 6
+Exportar desde un Archivo!!!!!!!!!!!""")
+        pass
+    
+    elif opcion==7:
+        print("""\nOpcion 7
 Saludos.
 Adios!!!!!!!!!!!""")
         break
