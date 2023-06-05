@@ -1,5 +1,42 @@
 ###Gestion de control. Primera version.
 
+def ingreso_producto (lista_stock):
+    
+        producto=input("Ingrese el nombre del producto: ").lower() ###Ingreso de un nuevo item la idea la key 'producto' esté en minuscula para facilitar la busqueda.
+        cantidad=int(input("Ingrese la cantidad a ingresar el producto: "))
+        precio=float(input("Ingrese el precio unitario del producto: "))
+        lista_stock[producto]={"cantidad":cantidad,"precio":precio} 
+
+def busqueda_producto(lista_stock):
+        producto=input("Ingrese el nombre del producto: ").lower() #seguimos con las minusculas
+    
+        if producto in lista_stock: 
+        ###un condicional para la busqueda, si esta se muestra los datos sino un mjs indicando que no esta.
+         
+            print(f"""El producto {producto} se encuentra en el inventario.
+    Estos son las unidades disponibles: {lista_stock[producto]["cantidad"]}.
+    Este es el precio unitario {lista_stock[producto]["precio"]}""")
+            
+        else:
+            print(f"No se ha encontrado una entrada con la descripción {producto}")
+        #Me gustaria agreagar un mjs y una funcion en el caso de que si no esta le pregunte al usuario si desea crear una nueva entrada
+
+def modificar_producto(lista_stock):
+        producto=input("Ingrese el producto a modificar: ").lower()
+        if producto in lista_stock: #me fijo si está el producto y en caso de ser afirmativo procedo a eliminar el par (key-value) y agregar el qu el usuario elija
+                lista_stock.pop(producto)
+                producto=input("Ingrese el nombre del producto: ").lower()
+                cantidad=int(input("Ingrese la cantidad a ingresar el producto: "))
+                precio=float(input("Ingrese el precio unitario del producto: "))
+                lista_stock[producto]={"cantidad":cantidad,"precio":precio}
+        else:
+            print(f"No se encuentra en la lista de stock el producto {producto} ")
+            
+def listado_productos (lista_stock):
+    for nombre,producto in lista_stock.items():
+        print (f"{nombre} - cantidad: {producto['cantidad']} - precio:{producto['precio']}.")
+        
+    
 print("""Bienvenido al Sistema de gestión y Control de stock""")
 
 stock={
@@ -11,7 +48,6 @@ stock={
 ###Datos para realizar pruebas básicas de funcionamiento, me gustaria cambiar los datos a mostrar quizas agregarle más.
 #Que el diccionario queda algo así stock={ 100200 : {'producto':'procesador','cantidad':12,'precio':50000,'importado':False}} ***100200 es una especie de codigo del stock
 
-
 while True:
     print("""Seleccione su Opción.
           1 - Ingresar producto.
@@ -22,56 +58,34 @@ while True:
           6 - Importar a un Archivo
           7 - Salir.
            """)
-    opcion=int(input("Ingrese su opción: "))
+    while True:
+        try:
+            opcion=int(input("Ingrese su opción: "))
+            break
+        except:
+            print("Tiene que ser un valor númerico: ")
     
-    if opcion==1: ###Ingreso de un nuevo item la idea la key 'producto' esté en minuscula para facilitar la busqueda.
+    if opcion==1: 
         print("""\nOpcion 1
 Ingreso de un nuevo producto dentro del stock""")
-        producto=input("Ingrese el nombre del producto: ").lower()
-        cantidad=int(input("Ingrese la cantidad a ingresar el producto: "))
-        precio=float(input("Ingrese el precio unitario del producto: "))
-        
-        stock[producto]={"cantidad":cantidad,"precio":precio} 
-        ### luego del ingreso de los datos se los empaqueta en un diccionario y 
-        # pasan a ser el value de otro diccionario en el cual el nombre del produccto es su descripción
-        
+        ingreso_producto(stock)
+     
     elif opcion==2:   
         print("""\nOpcion 2
 Buscaremos un artículo en el stock.""")
-        producto=input("Ingrese el nombre del producto: ").lower() #seguimos con las minusculas
-        
-        if producto in stock: 
-        ###un condicional para la busqueda, si esta se muestra los datos sino un mjs indicando que no esta.
-        
-            
-            print(f"""El producto {producto} se encuentra en el inventario.
-    Estos son las unidades disponibles: {stock[producto]["cantidad"]}.
-    Este es el precio unitario {stock[producto]["precio"]}""")
-            
-        else:
-            print(f"No se ha encontrado una entrada con la descripción {producto}")
-        #Me gustaria agreagar un mjs y una funcion en el caso de que si no esta le pregunte al usuario si desea crear una nueva entrada
-        
+        busqueda_producto(stock)
+  
     elif opcion==3:
         print("""\nOpcion 3
 Modificar producto.""")
-        producto=input("Ingrese el producto a modificar: ").lower()
-        if producto in stock: #me fijo si está el producto y en caso de ser afirmativo procedo a eliminar el par (key-value) y agregar el qu el usuario elija
-                stock.pop(producto)
-                producto=input("Ingrese el nombre del producto: ").lower()
-                cantidad=int(input("Ingrese la cantidad a ingresar el producto: "))
-                precio=float(input("Ingrese el precio unitario del producto: "))
-                stock[producto]={"cantidad":cantidad,"precio":precio}
-        else:
-            print(f"No se encuentra en la lista de stock el producto {producto} ")
-            
+        modificar_producto(stock)
+               
     elif opcion==4: 
         ###Un simple print del diccionario, falta dejarlo bonito es muy basico y no es una linda salida.
         print("""\nOpcion 4
-Listado de los productos en el inventario.""")
-        
-        for nombre,item in stock.items():
-            print(nombre, item)
+Listado de los productos en el inventario.""")   
+        listado_productos(stock)
+            
     elif opcion==5:
         print("""\nOpcion 5.
 Importar desde un archivo!!!!!!!!!!!""")
@@ -87,3 +101,6 @@ Exportar desde un Archivo!!!!!!!!!!!""")
 Saludos.
 Adios!!!!!!!!!!!""")
         break
+    else:
+        print("""Opcion Incorrecta
+Vuelta al menú""")
