@@ -36,7 +36,7 @@ def listado_productos (lista_stock):
     for nombre,producto in lista_stock.items():
         print (f"{nombre} - cantidad: {producto['cantidad']} - precio:{producto['precio']}.")
         
-    
+#main
 print("""Bienvenido al Sistema de gestión y Control de stock""")
 
 stock={
@@ -88,12 +88,12 @@ Listado de los productos en el inventario.""")
             
     elif opcion==5:
         print("""\nOpcion 5.
-Importar desde un archivo!!!!!!!!!!!""")
+Exportar a un archivo!!!!!!!!!!!""")
         pass
     
     elif opcion==6:
         print("""\nOpcion 6
-Exportar desde un Archivo!!!!!!!!!!!""")
+Importar desde un Archivo!!!!!!!!!!!""")
         pass
     
     elif opcion==7:
