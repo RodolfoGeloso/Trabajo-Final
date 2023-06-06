@@ -4,7 +4,7 @@ def ingreso_producto (lista_stock):
     
         producto=input("Ingrese el nombre del producto: ").lower() ###Ingreso de un nuevo item la idea la key 'producto' esté en minuscula para facilitar la busqueda.
         cantidad=int(input("Ingrese la cantidad a ingresar el producto: "))
-        precio=float(input("Ingrese el precio unitario del producto: "))
+        precio=float(input("Ingrese el precio unitario del producto: $"))
         lista_stock[producto]={"cantidad":cantidad,"precio":precio} 
 
 def busqueda_producto(lista_stock):
